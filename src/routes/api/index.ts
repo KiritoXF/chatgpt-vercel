@@ -138,7 +138,9 @@ export async function POST({ request }: APIEvent) {
             }
             try {
               const json = JSON.parse(data)
-              const text = `data:${json.choices[0].delta?.content}\n\n`
+              const text = `data:${JSON.stringify({
+                text: json.choices[0].delta?.content
+              })}\n\n`
               const queue = encoder.encode(text)
               controller.enqueue(queue)
             } catch (e) {
