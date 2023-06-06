@@ -153,11 +153,14 @@ export async function POST({ request }: APIEvent) {
       }
     })
 
-    return new Response(stream, {
+    const response = new Response(stream, {
       headers: {
-        "Content-Type": "text/event-stream"
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache",
+        Connection: "keep-alive"
       }
     })
+    return response
   } catch (err: any) {
     return new Response(
       JSON.stringify({
