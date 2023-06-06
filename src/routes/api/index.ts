@@ -140,7 +140,7 @@ export async function POST({ request }: APIEvent) {
               const json = JSON.parse(data)
               const text = json.choices[0].delta?.content
               const queue = encoder.encode(text)
-              controller.enqueue(queue)
+              controller.enqueue(`data: ${queue}\n\n`)
             } catch (e) {
               controller.error(e)
             }
