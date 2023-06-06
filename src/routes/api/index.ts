@@ -133,14 +133,17 @@ export async function POST({ request }: APIEvent) {
           if (event.type === "event") {
             const data = event.data
             if (data === "[DONE]") {
+              controller.enqueue(encoder.encode("data:$\n\n"))
               controller.close()
               return
             }
             try {
               const json = JSON.parse(data)
               const text = `data:${json.choices[0].delta?.content}\n\n`
-              const queue = encoder.encode(text)
-              controller.enqueue(queue)
+              if (text !== "undefined") {
+                const queue = encoder.encode(text)
+                controller.enqueue(queue)
+              }
             } catch (e) {
               controller.error(e)
             }
