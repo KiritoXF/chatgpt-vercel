@@ -4,6 +4,7 @@ import type { ChatMessage, Model } from "~/types"
 import { splitKeys, randomKey, fetchWithTimeout } from "~/utils"
 import { defaultEnv } from "~/env"
 import type { APIEvent } from "solid-start/api"
+import http from "http"
 
 export const config = {
   runtime: "edge",
@@ -153,7 +154,21 @@ export async function POST({ request }: APIEvent) {
       }
     })
 
-    return new Response(stream)
+    http.createServer((req, res) => {
+      res.writeHead(200, {
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache",
+        Connection: "keep-alive"
+      })
+
+      setInterval(() => {
+        res.write(`data: ${stream}\n\n`)
+      }, 1000)
+    })
+
+    // return new Response({
+    //   ...stream,
+    // })
   } catch (err: any) {
     return new Response(
       JSON.stringify({
