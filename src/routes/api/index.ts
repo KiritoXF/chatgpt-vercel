@@ -146,7 +146,7 @@ export async function POST({ request }: APIEvent) {
             }
           }
         }
-        const eventText = "event: gpt"
+        const eventText = "event: gpt\n"
         const eventQueue = encoder.encode(eventText)
         controller.enqueue(eventQueue)
         const parser = createParser(streamParser)
