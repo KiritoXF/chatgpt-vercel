@@ -57,7 +57,7 @@ export async function POST({ request }: APIEvent) {
       key?: string
       temperature: number
       password?: string
-      model: Model
+      model?: Model
     } = await request.json()
     const { messages, key = localKey, temperature, password, model } = body
 
@@ -103,7 +103,7 @@ export async function POST({ request }: APIEvent) {
         timeout,
         method: "POST",
         body: JSON.stringify({
-          model: model,
+          model: model || "gpt-3.5-turbo",
           messages: messages.map(k => ({ role: k.role, content: k.content })),
           temperature,
           stream: true
