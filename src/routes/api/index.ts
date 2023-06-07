@@ -61,10 +61,6 @@ export async function POST({ request }: APIEvent) {
     } = await request.json()
     const { messages, key = localKey, temperature, password, model } = body
 
-    if (request.method === "OPTIONS") {
-      return new Response("ok", { status: 200 })
-    }
-
     if (passwordSet && password !== passwordSet) {
       throw new Error("密码错误，请联系网站管理员。")
     }
@@ -167,12 +163,7 @@ export async function POST({ request }: APIEvent) {
       headers: {
         "Content-Type": "text/event-stream",
         "Cache-Control": "no-cache",
-        Connection: "keep-alive",
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Methods": "GET,OPTIONS,POST",
-        "Access-Control-Allow-Origin":
-          "http://hmi-web.dev.jiyuncorp.com/,http://hmi-web.test.jiyuncorp.com/,https://hmi-web.jiyuncorp.com/",
-        "Access-Control-Allow-Credentials": "true"
+        Connection: "keep-alive"
       }
     })
     return response

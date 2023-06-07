@@ -29,7 +29,7 @@
         { "key": "Access-Control-Allow-Credentials", "value": "true" },
         {
           "key": "Access-Control-Allow-Origin",
-          "value": "*"
+          "value": "http://hmi-web.dev.jiyuncorp.com,http://hmi-web.test.jiyuncorp.com,https://hmi-web.jiyuncorp.com"
         },
         {
           "key": "Access-Control-Allow-Methods",
