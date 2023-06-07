@@ -24,7 +24,7 @@
   },
   "headers": [
     {
-      "source": "/api/(.*)",
+      "source": "/:path((?!api).*)",
       "headers": [
         { "key": "Access-Control-Allow-Credentials", "value": "true" },
         {
