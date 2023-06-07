@@ -163,7 +163,12 @@ export async function POST({ request }: APIEvent) {
       headers: {
         "Content-Type": "text/event-stream",
         "Cache-Control": "no-cache",
-        Connection: "keep-alive"
+        Connection: "keep-alive",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Methods": "GET,OPTIONS,POST",
+        "Access-Control-Allow-Origin":
+          "http://hmi-web.dev.jiyuncorp.com/,http://hmi-web.test.jiyuncorp.com/,https://hmi-web.jiyuncorp.com/",
+        "Access-Control-Allow-Credentials": "true"
       }
     })
     return response
